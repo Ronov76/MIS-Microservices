@@ -1,0 +1,41 @@
+services:
+  mongodb:
+    image: mongo:5.0     # Verwende das offizielle MongoDB-Docker-Image
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"    # Exponiere den MongoDB-Port
+    volumes:
+      - ./mongoDB:/docker-entrypoint-initdb.d
+
+  nutzerauslesen:
+    build: ./nutzerauslesen/            # Baut den Node.js-Microservice basierend auf dem Dockerfile
+    container_name: nutzerAuslesen
+    environment:
+      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    depends_on:
+      - mongodb          # Stelle sicher, dass MongoDB zuerst startet
+    ports:
+      - "3000:3000"      # Exponiere den Port des Node.js-Services
+
+  nutzererstellen:
+    build: ./nutzererstellen/
+    container_name: nutzerErstellen
+    environment:
+      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    depends_on:
+      - nutzerauslesen
+    ports:
+      - "3001:3001"
+
+  nutzerloeschen:
+    build: ./nutzerloeschen
+    container_name: nutzerLoeschen
+    environment:
+      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    depends_on:
+      - nutzerauslesen
+    ports:
+      - "3002:3002"
