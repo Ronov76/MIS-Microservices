@@ -39,3 +39,14 @@ services:
       - nutzerauslesen
     ports:
       - "3002:3002"
+
+  website:
+    build: ./public
+    container_name: website
+    environment:
+      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    depends_on:
+      - nutzererstellen
+      - nutzerloeschen
+    ports:
+      - "3003:3003"

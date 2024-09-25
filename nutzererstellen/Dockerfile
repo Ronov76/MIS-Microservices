@@ -15,7 +15,7 @@ RUN npm install express axios mongodb
 COPY . .
 
 # 6. Exponiere den Port des Microservices
-EXPOSE 3000
+EXPOSE 3001
 
 # 7. Startbefehl für die App
 CMD ["node", "src/index.js"]

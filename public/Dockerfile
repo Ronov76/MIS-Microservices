@@ -15,7 +15,7 @@ RUN npm install express
 COPY . .
 
 # 6. Exponiere den Port des Microservices
-EXPOSE 3000
+EXPOSE 3003
 
 # 7. Startbefehl für die App
 CMD ["node", "src/index.js"]
