@@ -3,16 +3,12 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
-const port = 3004;
+const port = 3003;
 
 app.use(express.json());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
-});
-
-app.get('/', (req, res) => {
-  res.send('nutzerLoeschenMS');
 });
 
 app.listen(port, () => {
