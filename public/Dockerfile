@@ -9,6 +9,7 @@ COPY package*.json ./
 
 # 4. Installiere die Abhängigkeiten
 RUN npm install
+RUN npm install express
 
 # 5. Kopiere den Rest des App-Codes
 COPY . .
