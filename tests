@@ -1,3 +1,5 @@
 curl -X POST http://localhost:3000/nutzerauslesen -H "Content-Type: application/json" -d "{\"id\": 101}"
 
 curl -X POST http://localhost:3001/nutzerErstellen -H "Content-Type: application/json" -d "{\"id\": 104, \"name\": \"Klaus\", \"alter\": 34}"
+
+curl -X POST http://localhost:3002/nutzerloeschen -H "Content-Type: application/json" -d "{\"id\": 101}"

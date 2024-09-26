@@ -29,7 +29,7 @@ connectToMongo();
 
 app.post("/nutzerLoeschen", async (req, res) => {
 
-  const { id, name, alter } = req.body;
+  const { id } = req.body;
   if(!id) {
     return res.status(400).json({error: "Nutzer ID muss eingegeben werden!"});
   }
@@ -40,13 +40,13 @@ app.post("/nutzerLoeschen", async (req, res) => {
 
     if(message === "false") {
         console.log(1);
-        return res.status(402).json({ statusBool: "false", message: "Nutzer konnte nicht gelöscht werden"});
+        return res.status(402).json({ statusBool: "false", message: "Es gibt keinen Nutzer mit dieser ID"});
     }
     
-    const result = await db.collection("nutzerDB").deleteOne({id: id});
+    const result = await db.collection("nutzerColl").deleteOne({ id: id });
 
     if (result.deletedCount == 0) {
-      return res.status(401).json({ statusBool: "false", message: "Es gibt keinen Nutzer mit dieser ID"});
+      return res.status(401).json({ statusBool: "false", message: "Nutzer konnte nicht geloescht werden"});
     }
 
     return res.status(201).json({statusBool: "true", message: "Nutzer wurde geloescht"});

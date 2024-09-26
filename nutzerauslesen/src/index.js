@@ -32,19 +32,19 @@ app.post("/nutzerAuslesen", async (req, res) => {
   if(!id) {
     return res.status(400).json({error: "Nutzer ID muss eingegeben werden!"});
   }
-
   try {
 
     const result = await db.collection("nutzerColl").findOne({id: id})
-    
+
     if(result) {
         console.log(1);
         return res.status(201).json({ message: "true" });
     }
-    return res.status(204).json({ message: "false"});
+    return res.status(201).json({ message: "false" });
   
   } catch (error) {
     console.error("Fehler bei der Anfrage:", error.message);
+    console.log("Interner Test");
     return res.status(500).send("Interner Serverfehler");
   }
 
