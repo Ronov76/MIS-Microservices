@@ -35,15 +35,20 @@ app.post("/nutzerLoeschen", async (req, res) => {
   }
 
   try {
-    const response = await axios.post("http://nutzerauslesen:3000/nutzerauslesen", { id });
+    const response = await axios.post("http://nutzerauslesen:3000/nutzerAuslesen", { id });
     const message = response.data.message;
 
     if(message === "false") {
         console.log(1);
-        return res.status(404).json({ statusBool: "false", message: "Nutzer wurde nicht geloescht!" });
+        return res.status(402).json({ statusBool: "false", message: "Nutzer konnte nicht gelöscht werden"});
     }
     
     const result = await db.collection("nutzerDB").deleteOne({id: id});
+
+    if (result.deletedCount == 0) {
+      return res.status(401).json({ statusBool: "false", message: "Es gibt keinen Nutzer mit dieser ID"});
+    }
+
     return res.status(201).json({statusBool: "true", message: "Nutzer wurde geloescht"});
   
   } catch (error) {

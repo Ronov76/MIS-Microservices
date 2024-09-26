@@ -41,15 +41,21 @@ app.post("/nutzerErstellen", async (req, res) => {
   }
 
   try {
+    console.log(4);
     const response = await axios.post("http://nutzerauslesen:3000/nutzerauslesen", { id });
+    console.log(5);
     const message = response.data.message;
+    console.log(6);
 
     if(message === "true") {
         console.log(1);
-        return res.status(404).json({ message: "Bereits vorhanden!" });
+        return res.status(404).json({ message: "ID ist bereits vorhanden!" });
     }
-    
-    const result = await db.collection("nutzerDB").insertOne({nutzerID, name, alter});
+    console.log(1)
+
+    const result = await db.collection("nutzerColl").insertOne({id, name, alter});
+    console.log(2)
+
     return res.status(201).json({message: "Nutzer wurde erstellt"});
   
   } catch (error) {
