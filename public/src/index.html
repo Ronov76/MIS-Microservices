@@ -10,16 +10,65 @@
 
     <h2>Nutzer loeschen</h2>
     <p>ID: </p><input type="number" id="txtID" name="txtID" placeholder=101> 
-    <input type="delete" value="Nutzer löschen">
+    <input type="submit" id="bntDelete" value="Nutzer löschen">
 
     <br>
     <h2>Nutzer erstellen</h2>
 
     <p>Name:</p><input type="text" id="txtName" name="txtName" placeholder="Klaus Günther">
     <p>Alter:</p><input type="number" id="txtAlter" name="txtAlter" placeholder=81>
-    <input type="create" value="Nutzer erstellen">
+    <input type="submit" id="bntCreate" value="Nutzer erstellen">
 
     <p id="status"></p>
+
+    <script>
+
+        function loeschen() {
+
+            const txtID = document.getElementById('txtID');
+
+            fetch("http://localhost:3001/nutzerloeschen", {
+                methode: "POST", 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: txtID.value
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Nutzer konnte nicht gelöscht werden")
+                }
+            })
+            .then(data => {
+                lblStatus.textContent = "Nutzer wurde erfolgreich gelöscht!";
+                console.log(data);
+            })
+            .catch(error => {
+                lblStatus.textContent = error.message;
+                console.error(error);
+            });
+
+            const bntErstellen = document.getElementById('bntCreate');
+            const bntLoeschen = document.getElementById('bntDelete');
+
+            const txtName = document.getElementById('txtName');
+            const txtAlter = document.getElementById('txtAlter');
+
+            const lblStatus = document.getElementById('status');
+
+            bntErstellen.addEventListener('click', () => {
+            const id = txtID.value;
+            console.log(id);
+            });
+
+        }
+
+
+    </script>
 
 </body>
 </html>

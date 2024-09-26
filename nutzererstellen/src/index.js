@@ -41,7 +41,7 @@ app.post("/nutzerErstellen", async (req, res) => {
   }
 
   try {
-    const response = await axios.post("http://nutzerVorhanden:3000/nutzerVorhanden", { id });
+    const response = await axios.post("http://nutzerauslesen:3000/nutzerauslesen", { id });
     const message = response.data.message;
 
     if(message === "true") {
