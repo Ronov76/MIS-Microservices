@@ -36,13 +36,12 @@ app.post("/nutzerAuslesen", async (req, res) => {
   try {
 
     const result = await db.collection("nutzerColl").findOne({id: id})
-
+    
     if(result) {
         console.log(1);
         return res.status(201).json({ message: "true" });
     }
-
-    return res.status(404).json({message: "false"});
+    return res.status(204).json({ message: "false"});
   
   } catch (error) {
     console.error("Fehler bei der Anfrage:", error.message);
