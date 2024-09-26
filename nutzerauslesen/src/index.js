@@ -28,7 +28,7 @@ connectToMongo();
 
 app.post("/nutzerAuslesen", async (req, res) => {
 
-  const { id, name, alter } = req.body;
+  const { id } = req.body;
   if(!id) {
     return res.status(400).json({error: "Nutzer ID muss eingegeben werden!"});
   }

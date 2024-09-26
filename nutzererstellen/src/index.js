@@ -60,7 +60,7 @@ app.post("/nutzerErstellen", async (req, res) => {
   
   } catch (error) {
     console.error("Fehler bei der Anfrage:", error.message);
-    return res.status(500).send("Interner Serverfehler");
+    return res.status(500).send(error);
   }
 
 });

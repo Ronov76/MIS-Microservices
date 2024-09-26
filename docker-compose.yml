@@ -12,9 +12,9 @@ services:
 
   nutzerauslesen:
     build: ./nutzerauslesen/            # Baut den Node.js-Microservice basierend auf dem Dockerfile
-    container_name: nutzerAuslesen
-    environment:
-      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    container_name: nutzerauslesen
+    #environment:
+      #MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
     depends_on:
       - mongodb          # Stelle sicher, dass MongoDB zuerst startet
     ports:
@@ -22,9 +22,9 @@ services:
 
   nutzererstellen:
     build: ./nutzererstellen/
-    container_name: nutzerErstellen
-    environment:
-      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    container_name: nutzererstellen
+    #environment:
+      #MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
     depends_on:
       - nutzerauslesen
     ports:
@@ -32,9 +32,9 @@ services:
 
   nutzerloeschen:
     build: ./nutzerloeschen
-    container_name: nutzerLoeschen
-    environment:
-      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    container_name: nutzerloeschen
+    #environment:
+      #MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
     depends_on:
       - nutzerauslesen
     ports:
@@ -43,8 +43,8 @@ services:
   website:
     build: ./public
     container_name: website
-    environment:
-      MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
+    #environment:
+      #MONGO_URL: mongodb://root:example@mongodb:27017/nutzerDB?authSource=admin
     depends_on:
       - nutzererstellen
       - nutzerloeschen
