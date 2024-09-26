@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mircoservices für Nutzer</title>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <h1>Nutzerverwaltung</h1>
+
+    <h2>Nutzer loeschen</h2>
+    <p>ID: </p><input type="number" id="txtID" name="txtID" placeholder=101> 
+    <br>
+    <br>
+    <button id="bntDelete" onclick="nutzerLoeschen()" >Löschen</button>
+
+    <br>
+    <h2>Nutzer erstellen</h2>
+
+    <p>Name:</p>
+    <input type="text" id="txtName" name="txtName" placeholder="Klaus Günther">
+    <p>Alter:</p><input type="number" id="txtAlter" name="txtAlter" placeholder=81>
+    <br>
+    <br>
+    <button id="bntCreate" onclick="nutzerErstellen()" >Erstellen</button>
+
+    <br>
+    <p id="status"></p>
+
+</body>
+</html>
