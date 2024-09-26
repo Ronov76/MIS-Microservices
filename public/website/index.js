@@ -6,7 +6,7 @@ function nutzerErstellen() {
     const name = document.getElementById("txtName").value;
     const alter = parseInt(document.getElementById("txtAlter").value, 10);
 
-    fetch("http://localhost:3003/nutzerstellen", {
+    fetch("http://localhost:3003/nutzerErstellen", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
